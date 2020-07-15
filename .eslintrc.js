@@ -15,6 +15,10 @@ module.exports = {
   rules: {
     '@typescript-eslint/explicit-member-accessibility': 0,
     '@typescript-eslint/explicit-function-return-type': 0,
+    'no-use-before-define': [
+      'error',
+      { functions: true, classes: true, variables: false },
+    ],
     'no-unused-vars': [
       'error',
       {
@@ -40,13 +44,26 @@ module.exports = {
         devDependencies: true,
       },
     ],
+    'import/extensions': [
+      'error',
+      'always',
+      {
+        ts: 'never',
+        tsx: 'never',
+        js: 'never',
+        jsx: 'never',
+      },
+    ],
   },
   settings: {
     'import/resolver': {
       node: {
         paths: ['src'],
-        extensions: ['.ts', '.tsx'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
+    },
+    react: {
+      version: 'detect',
     },
   },
 };
