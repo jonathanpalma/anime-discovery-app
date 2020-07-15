@@ -15,6 +15,7 @@ module.exports = {
   rules: {
     '@typescript-eslint/explicit-member-accessibility': 0,
     '@typescript-eslint/explicit-function-return-type': 0,
+    '@typescript-eslint/no-unused-vars': 'error',
     'no-use-before-define': [
       'error',
       { functions: true, classes: true, variables: false },
@@ -25,6 +26,7 @@ module.exports = {
         argsIgnorePattern: '_',
       },
     ],
+
     'no-plusplus': [
       'error',
       {
@@ -57,10 +59,7 @@ module.exports = {
   },
   settings: {
     'import/resolver': {
-      node: {
-        paths: ['src'],
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
-      },
+      typescript: {}, // load tsconfig to eslint
     },
     react: {
       version: 'detect',
