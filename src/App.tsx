@@ -25,12 +25,13 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import ReduxProvider from './components/ReduxProvider';
 
 declare const global: { HermesInternal: null | {} };
 
 const App = () => {
   return (
-    <>
+    <ReduxProvider>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
         <ScrollView
@@ -73,7 +74,7 @@ const App = () => {
           </View>
         </ScrollView>
       </SafeAreaView>
-    </>
+    </ReduxProvider>
   );
 };
 
