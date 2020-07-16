@@ -48,7 +48,7 @@ export default ScrollCardSection;
 
 const styles = StyleSheet.create({
   horizontalScrollContainer: {
-    paddingBottom: 20,
+    paddingBottom: 10,
     paddingLeft: 10,
     paddingRight: 20,
     paddingTop: 10,
