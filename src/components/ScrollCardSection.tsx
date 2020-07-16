@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
+import { FlatList, View, Text, StyleSheet } from 'react-native';
 import Card from '@app/components/Card';
 import { Item } from '@app/ts/types';
 
