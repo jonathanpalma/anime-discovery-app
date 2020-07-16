@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Button,
-  View,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-} from 'react-native';
-import { useNavigation } from 'react-navigation-hooks';
+import { View, SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import ScrollCardSection from '@app/components/ScrollCardSection';
 import { Item } from '@app/ts/types';
 
@@ -33,10 +26,6 @@ const ITEMS: Item[] = [
 ];
 
 function Home() {
-  const { navigate } = useNavigation();
-  const goToDetail = () => {
-    navigate('Detail');
-  };
   return (
     <View style={styles.container}>
       <SafeAreaView>
@@ -45,7 +34,6 @@ function Home() {
           <ScrollCardSection title="Title 2" items={ITEMS} />
           <ScrollCardSection title="Title 3" items={ITEMS} />
           <ScrollCardSection title="Title 4" items={ITEMS} />
-          <Button onPress={goToDetail} title="Go to detail" />
         </ScrollView>
       </SafeAreaView>
     </View>
