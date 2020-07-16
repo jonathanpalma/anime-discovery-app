@@ -27,8 +27,6 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     height: 225,
     width: 150,
-    marginLeft: 20,
-    marginTop: 20,
     // box-shadow
     elevation: 3,
     shadowColor: '#000',
