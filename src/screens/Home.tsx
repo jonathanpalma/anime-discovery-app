@@ -7,19 +7,19 @@ import { Item } from '@app/ts/types';
 const ITEMS: Item[] = [
   {
     image:
-      'https://media.kitsu.io/anime/poster_images/5714/large.jpg?1408456259',
+      'https://media.kitsu.io/anime/poster_images/5714/small.jpg?1408456259',
     slug: '1',
     title: 'Kimetsu No Yaiba',
   },
   {
     image:
-      'https://media.kitsu.io/anime/poster_images/5714/large.jpg?1408456259',
+      'https://media.kitsu.io/anime/poster_images/5714/small.jpg?1408456259',
     slug: '2',
     title: 'Boku No Hero Academia',
   },
   {
     image:
-      'https://media.kitsu.io/anime/poster_images/5714/large.jpg?1408456259',
+      'https://media.kitsu.io/anime/poster_images/5714/small.jpg?1408456259',
     slug: '3',
     title: 'Shingeki No Kyoji',
   },
@@ -31,9 +31,6 @@ function Home() {
       <SafeAreaView>
         <ScrollView style={styles.scrollContainer}>
           <ScrollCardSection title="Title 1" items={ITEMS} />
-          <ScrollCardSection title="Title 2" items={ITEMS} />
-          <ScrollCardSection title="Title 3" items={ITEMS} />
-          <ScrollCardSection title="Title 4" items={ITEMS} />
         </ScrollView>
       </SafeAreaView>
     </View>

@@ -25,11 +25,11 @@ function ScrollCardSection({ items = [], title }: Props) {
     <TouchableNativeFeedback
       useForeground={true}
       onPress={() => {
-        navigate('Detail', item);
+        navigate('Detail', { item });
       }}
     >
       <View style={styles.touchable}>
-        <Card title={item.title} image={item.image} />
+        <Card id={item.slug} title={item.title} image={item.image} />
       </View>
     </TouchableNativeFeedback>
   );
