@@ -21,13 +21,15 @@ type ItemProps = {
 
 function ScrollCardSection({ items = [], title }: Props) {
   const { navigate } = useNavigation();
-  const navigateToDetail = () => {
-    navigate('Detail');
-  };
   const renderItem = ({ item }: ItemProps) => (
-    <TouchableNativeFeedback useForeground={true} onPress={navigateToDetail}>
+    <TouchableNativeFeedback
+      useForeground={true}
+      onPress={() => {
+        navigate('Detail', { item });
+      }}
+    >
       <View style={styles.touchable}>
-        <Card title={item.title} image={item.image} />
+        <Card id={item.slug} title={item.title} image={item.image} />
       </View>
     </TouchableNativeFeedback>
   );
