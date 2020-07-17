@@ -1,23 +1,29 @@
 import React from 'react';
-import { Text, View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from 'react-navigation-hooks';
 import { SharedElement } from 'react-navigation-shared-element';
+import TextValue from '@app/components/TextValue';
+import { Item } from '@app/ts/types';
 
 function Detail() {
   const { getParam } = useNavigation();
-  const item = getParam('item', {});
+  const item: Item = getParam('item', {});
   return (
     <View style={styles.container}>
       <SafeAreaView>
-        <Text>Detail: {item?.title}</Text>
-        <SharedElement id={`item.${item?.slug}.image`}>
-          <Image
-            style={styles.image}
-            source={{ uri: item?.image }}
-            resizeMode="cover"
-          />
-        </SharedElement>
+        <View style={styles.header}>
+          <SharedElement id={`item.${item?.slug}.image`}>
+            <Image
+              style={styles.image}
+              source={{ uri: item?.image }}
+              resizeMode="cover"
+            />
+          </SharedElement>
+          <View>
+            <TextValue label="Main Title" value={item?.title} />
+          </View>
+        </View>
       </SafeAreaView>
     </View>
   );
@@ -34,6 +40,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f0f3f5',
+  },
+  header: {
+    flexDirection: 'row',
   },
   image: {
     height: 115,
