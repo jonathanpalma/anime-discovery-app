@@ -8,15 +8,15 @@ import {
 } from 'react-native';
 import { useNavigation } from 'react-navigation-hooks';
 import Card from '@app/components/Card';
-import { Item } from '@app/ts/types';
+import { CardItem } from '@app/ts/types';
 
 type Props = {
-  items: Item[];
+  items: CardItem[];
   title: string;
 };
 
 type ItemProps = {
-  item: Item;
+  item: CardItem;
 };
 
 function ScrollCardSection({ items = [], title }: Props) {
@@ -29,7 +29,7 @@ function ScrollCardSection({ items = [], title }: Props) {
       }}
     >
       <View style={styles.touchable}>
-        <Card id={item.slug} title={item.title} image={item.image} />
+        <Card id={item?.id} title={item?.title} image={item?.image} />
       </View>
     </TouchableNativeFeedback>
   );
@@ -43,7 +43,7 @@ function ScrollCardSection({ items = [], title }: Props) {
         contentContainerStyle={styles.horizontalScrollContainer}
         data={items}
         horizontal={true}
-        keyExtractor={(item) => item.slug}
+        keyExtractor={(item) => item?.id}
         renderItem={renderItem}
         showsHorizontalScrollIndicator={false}
       />

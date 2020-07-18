@@ -1,26 +1,26 @@
 import React from 'react';
 import { View, SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import ScrollCardSection from '@app/components/ScrollCardSection';
-import { Item } from '@app/ts/types';
+import { CardItem } from '@app/ts/types';
 
 // TODO: get information from API
-const ITEMS: Item[] = [
+const ITEMS: CardItem[] = [
   {
     image:
       'https://media.kitsu.io/anime/poster_images/5714/small.jpg?1408456259',
-    slug: '1',
+    id: '1',
     title: 'Kimetsu No Yaiba',
   },
   {
     image:
       'https://media.kitsu.io/anime/poster_images/5714/small.jpg?1408456259',
-    slug: '2',
+    id: '2',
     title: 'Boku No Hero Academia',
   },
   {
     image:
       'https://media.kitsu.io/anime/poster_images/5714/small.jpg?1408456259',
-    slug: '3',
+    id: '3',
     title: 'Shingeki No Kyoji',
   },
 ];

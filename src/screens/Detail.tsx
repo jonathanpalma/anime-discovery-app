@@ -4,16 +4,16 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from 'react-navigation-hooks';
 import { SharedElement } from 'react-navigation-shared-element';
 import TextValue from '@app/components/TextValue';
-import { Item } from '@app/ts/types';
+import { CardItem } from '@app/ts/types';
 
 function Detail() {
   const { getParam } = useNavigation();
-  const item: Item = getParam('item', {});
+  const item: CardItem = getParam('item', {});
   return (
     <View style={styles.container}>
       <SafeAreaView>
         <View style={styles.header}>
-          <SharedElement id={`item.${item?.slug}.image`}>
+          <SharedElement id={`item.${item?.id}.image`}>
             <Image
               style={styles.image}
               source={{ uri: item?.image }}
@@ -31,7 +31,7 @@ function Detail() {
 
 Detail.sharedElements = (navigation: ReturnType<typeof useNavigation>) => {
   const item = navigation.getParam('item', {});
-  return [`item.${item?.slug}.image`];
+  return [`item.${item?.id}.image`];
 };
 
 export default Detail;
