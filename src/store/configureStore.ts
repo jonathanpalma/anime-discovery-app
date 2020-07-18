@@ -4,11 +4,23 @@ import {
   ThunkAction,
   Action,
 } from '@reduxjs/toolkit';
+import { enableBatching, batchDispatchMiddleware } from 'redux-batched-actions';
+import createApiMiddleware from '@app/store/middlewares/api';
 import reducer from '@app/store/reducer';
+import config from '@app/config';
 
-const middleware = [...getDefaultMiddleware()];
+const apiMiddleware = createApiMiddleware({
+  baseURL: config.api.baseURL,
+});
+
+const middleware = [
+  ...getDefaultMiddleware(),
+  batchDispatchMiddleware,
+  apiMiddleware,
+];
+
 const store = configureStore({
-  reducer,
+  reducer: enableBatching(reducer),
   middleware,
 });
 
