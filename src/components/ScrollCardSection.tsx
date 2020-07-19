@@ -6,26 +6,29 @@ import {
   TouchableNativeFeedback,
   View,
 } from 'react-native';
-import { useNavigation } from 'react-navigation-hooks';
 import Card from '@app/components/Card';
 import { CardItem } from '@app/ts/types';
 
 type Props = {
   items: CardItem[];
   title: string;
+  onCardPress: (id: string) => void;
 };
 
 type ItemProps = {
   item: CardItem;
 };
 
-function ScrollCardSection({ items = [], title }: Props) {
-  const { navigate } = useNavigation();
+function ScrollCardSection({
+  items = [],
+  onCardPress = (_) => {},
+  title,
+}: Props) {
   const renderItem = ({ item }: ItemProps) => (
     <TouchableNativeFeedback
       useForeground={true}
       onPress={() => {
-        navigate('Detail', { item });
+        onCardPress(item.id);
       }}
     >
       <View style={styles.touchable}>

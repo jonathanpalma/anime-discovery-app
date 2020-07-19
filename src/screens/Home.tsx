@@ -2,6 +2,7 @@ import React from 'react';
 import { View, SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import ScrollCardSection from '@app/components/ScrollCardSection';
 import { CardItem } from '@app/ts/types';
+import { useNavigation } from 'react-navigation-hooks';
 
 // TODO: get information from API
 const ITEMS: CardItem[] = [
@@ -26,11 +27,19 @@ const ITEMS: CardItem[] = [
 ];
 
 function Home() {
+  const { navigate } = useNavigation();
+  const onCardPress = (id: string) => {
+    navigate('Detail', { item: ITEMS.find((item) => item.id === id) });
+  };
   return (
     <View style={styles.container}>
       <SafeAreaView>
         <ScrollView style={styles.scrollContainer}>
-          <ScrollCardSection title="Title 1" items={ITEMS} />
+          <ScrollCardSection
+            title="Title 1"
+            items={ITEMS}
+            onCardPress={onCardPress}
+          />
         </ScrollView>
       </SafeAreaView>
     </View>
