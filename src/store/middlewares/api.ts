@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { Middleware, PayloadAction } from '@reduxjs/toolkit';
 import { batchActions } from 'redux-batched-actions';
+// @ts-ignore
+import normalize from 'json-api-normalizer';
 import * as actions from '@app/store/slices/api';
 import { ApiAction, isStrings, ActionCallback } from '@app/ts/types';
 
@@ -22,7 +24,6 @@ export default function createApiMiddleware(options: Options) {
   const api: Middleware = ({ dispatch }) => (next) => async (
     action: PayloadAction<ApiAction>
   ) => {
-    console.log('Api middleware picked up action', action);
     if (action.type !== actions.apiRequestBegan.type) {
       next(action);
       return;
@@ -34,7 +35,6 @@ export default function createApiMiddleware(options: Options) {
       onError,
       onStart,
       onSuccess,
-      transformResponse,
       url,
     } = action.payload;
 
@@ -44,16 +44,17 @@ export default function createApiMiddleware(options: Options) {
     next(action);
 
     try {
-      console.log(`Sending server request to server ${options.baseURL}`, data);
+      console.log(`Sending server request to server ${options.baseURL}${url}`);
       const response = await axios.request({
         baseURL: options.baseURL,
         data,
         headers,
         method,
-        transformResponse,
         url,
       });
-
+      if (response.headers['content-type'] === 'application/vnd.api+json') {
+        response.data = normalize(response.data);
+      }
       dispatch(actions.apiRequestSuccess(response.data));
       if (onSuccess) {
         const payload = response.data;
