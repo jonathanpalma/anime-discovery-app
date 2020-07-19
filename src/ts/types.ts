@@ -1,3 +1,5 @@
+import { AxiosTransformer } from 'axios';
+
 type AnimeType = 'ONA' | 'OVA' | 'TV' | 'movie' | 'music' | 'special';
 type MangaType =
   | 'doujin'
@@ -82,6 +84,7 @@ export type ApiAction = {
   onError?: string;
   onStart?: string;
   onSuccess?: string | string[] | ActionCallback | ActionCallback[];
+  transformResponse?: AxiosTransformer | AxiosTransformer[];
   url: string;
 };
 export type NormalizedState<T> = {

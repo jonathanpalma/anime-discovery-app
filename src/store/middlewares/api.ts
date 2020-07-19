@@ -4,7 +4,7 @@ import { batchActions } from 'redux-batched-actions';
 import * as actions from '@app/store/slices/api';
 import { ApiAction, isStrings, ActionCallback } from '@app/ts/types';
 
-type options = {
+type Options = {
   baseURL: string;
 };
 
@@ -18,7 +18,7 @@ export const createActionCallback = (type: string) => (
   shouldForwardPayload,
 });
 
-export default function createApiMiddleware(options: options) {
+export default function createApiMiddleware(options: Options) {
   const api: Middleware = ({ dispatch }) => (next) => async (
     action: PayloadAction<ApiAction>
   ) => {
@@ -34,6 +34,7 @@ export default function createApiMiddleware(options: options) {
       onError,
       onStart,
       onSuccess,
+      transformResponse,
       url,
     } = action.payload;
 
@@ -49,6 +50,7 @@ export default function createApiMiddleware(options: options) {
         data,
         headers,
         method,
+        transformResponse,
         url,
       });
 
