@@ -22,7 +22,7 @@ export const field = (path: string) => (fields: Field[]) => {
   const params = fields
     .map((f) => `fields[${f.entity}]=${f.fields.join(',')}`)
     .join('&');
-  const newPath = `${path}${operator}${params}}`;
+  const newPath = `${path}${operator}${params}`;
   return createJsonApiResource(newPath);
 };
 
@@ -38,9 +38,9 @@ export const filter = (path: string) => (filters: Filter[]) => {
 export const include = (path: string) => (relationships: string[]) => {
   const operator = getPathOperator(path);
   const params = `include=${relationships.join(',')}`;
-  const newPath = path.includes('include=')
+  const newPath = !path.includes('include=')
     ? `${path}${operator}${params}`
-    : path.replace(/include=(\D+)$/, params);
+    : path.replace(/include=\D+/g, params);
   return createJsonApiResource(newPath);
 };
 
@@ -50,20 +50,20 @@ export const paginate = (path: string) => ({
 }: Pagination) => {
   const operator = getPathOperator(path);
   const params = `page[limit]=${limit}&page[offset]=${offset}`;
-  const newPath = path.includes('page[limit]=')
+  const newPath = !path.includes('page[limit]=')
     ? `${path}${operator}${params}`
     : path
-        .replace(/page\[limit\]=([0-9]+)$/, `page[limit]=${limit}`)
-        .replace(/page\[offset\]=([0-9]+)$/, `page[offset]=${offset}`);
+        .replace(/page\[limit\]=\d+/g, `page[limit]=${limit}`)
+        .replace(/page\[offset\]=\d+/g, `page[offset]=${offset}`);
   return createJsonApiResource(newPath);
 };
 
 export const sort = (path: string) => (attributes: string[]) => {
   const operator = getPathOperator(path);
   const params = `sort=${attributes.join(',')}`;
-  const newPath = path.includes('sort=')
+  const newPath = !path.includes('sort=')
     ? `${path}${operator}${params}`
-    : path.replace(/sort=([0-9]+)$/, params);
+    : path.replace(/sort=\d+/g, params);
   return createJsonApiResource(newPath);
 };
 
