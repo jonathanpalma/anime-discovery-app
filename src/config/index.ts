@@ -9,9 +9,31 @@ const BASE_URL = 'https://kitsu.io/api/edge';
 const commons = {
   api: {
     baseURL: BASE_URL, // domain + base path (i.e. /api)
+    headers: {
+      Accept: 'application/vnd.api+json',
+      'Content-Type': 'application/vnd.api+json',
+    },
     endpoints: {
-      getAnime: createJsonApiResource('anime'),
-      getManga: createJsonApiResource('manga'),
+      getAnime: createJsonApiResource('/anime'),
+      getAnimeList: createJsonApiResource('/anime')
+        .field([
+          {
+            entity: 'anime',
+            fields: [
+              'canonicalTitle',
+              'endDate',
+              'episodeCount',
+              'popularityRank',
+              'posterImage',
+              'ratingRank',
+              'showType',
+              'subtype',
+              'startDate',
+            ],
+          },
+        ])
+        .paginate({ limit: 10, offset: 0 }),
+      getManga: createJsonApiResource('/manga'),
     },
   },
 };
