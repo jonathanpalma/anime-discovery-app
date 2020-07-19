@@ -15,7 +15,13 @@ module.exports = {
   rules: {
     '@typescript-eslint/explicit-member-accessibility': 0,
     '@typescript-eslint/explicit-function-return-type': 0,
-    '@typescript-eslint/no-unused-vars': 'error',
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        argsIgnorePattern: '_',
+      },
+    ],
+    'no-param-reassign': ['error', { props: false }],
     'no-use-before-define': [
       'error',
       { functions: true, classes: true, variables: false },
