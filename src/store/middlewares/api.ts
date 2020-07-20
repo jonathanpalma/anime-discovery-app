@@ -60,18 +60,22 @@ export default function createApiMiddleware(options: Options) {
         const payload = response.data;
         if (Array.isArray(onSuccess)) {
           if (isStrings(onSuccess)) {
-            batchActions(onSuccess.map((type) => ({ type, payload })));
+            dispatch(
+              batchActions(onSuccess.map((type) => ({ type, payload })))
+            );
           } else {
-            batchActions(
-              onSuccess.map(({ type, shouldForwardPayload = false }) =>
-                shouldForwardPayload
-                  ? {
-                      type,
-                    }
-                  : {
-                      type,
-                      payload,
-                    }
+            dispatch(
+              batchActions(
+                onSuccess.map(({ type, shouldForwardPayload = false }) =>
+                  shouldForwardPayload
+                    ? {
+                        type,
+                      }
+                    : {
+                        type,
+                        payload,
+                      }
+                )
               )
             );
           }
