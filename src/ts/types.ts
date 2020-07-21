@@ -30,7 +30,7 @@ export type Anime = {
     endDate: string;
     episodeCount: number;
     popularityRank: number;
-    coverImage: Image;
+    posterImage: Image;
     ratingRank: number;
     status: Status;
     showType: AnimeType;
@@ -46,7 +46,7 @@ export type Manga = {
     endDate: string;
     episodeCount: number;
     popularityRank: number;
-    coverImage: Image;
+    posterImage: Image;
     ratingRank: number;
     status: Status;
     showType: MangaType;
@@ -60,6 +60,15 @@ export type CardItem = {
   title: string;
   image: string;
 };
+export type CardCallback = {
+  id: string;
+  imageId: string;
+};
+
+// api
+export type AnimeResponse = {
+  anime: { [key: string]: Anime };
+};
 
 // json api
 export type JsonApiLink = {
@@ -67,6 +76,11 @@ export type JsonApiLink = {
   related?: string;
 };
 export type JsonApiRelationship = { links: JsonApiLink };
+// assuming that the app only handles anime and manga
+export type JsonApiResponse<T> = {
+  anime?: { [key: string]: T };
+  manga?: { [key: string]: T };
+};
 
 // redux
 export type ActionCallback = {
