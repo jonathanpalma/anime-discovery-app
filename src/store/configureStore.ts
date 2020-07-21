@@ -5,6 +5,7 @@ import {
   Action,
 } from '@reduxjs/toolkit';
 import { enableBatching, batchDispatchMiddleware } from 'redux-batched-actions';
+import { createLogger } from 'redux-logger';
 import createApiMiddleware from '@app/store/middlewares/api';
 import reducer from '@app/store/reducer';
 import config from '@app/config';
@@ -18,6 +19,10 @@ const middleware = [
   batchDispatchMiddleware,
   apiMiddleware,
 ];
+
+if (__DEV__) {
+  middleware.push(createLogger());
+}
 
 const store = configureStore({
   reducer: enableBatching(reducer),
