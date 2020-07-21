@@ -6,13 +6,14 @@ import {
   TouchableNativeFeedback,
   View,
 } from 'react-native';
+import camelCase from 'lodash/camelCase';
 import Card from '@app/components/Card';
-import { CardItem } from '@app/ts/types';
+import { CardCallback, CardItem } from '@app/ts/types';
 
 type Props = {
   items: CardItem[];
   title: string;
-  onCardPress: (id: string) => void;
+  onCardPress: (cb: CardCallback) => void;
 };
 
 type ItemProps = {
@@ -24,18 +25,21 @@ function ScrollCardSection({
   onCardPress = (_) => {},
   title,
 }: Props) {
-  const renderItem = ({ item }: ItemProps) => (
-    <TouchableNativeFeedback
-      useForeground={true}
-      onPress={() => {
-        onCardPress(item.id);
-      }}
-    >
-      <View style={styles.touchable}>
-        <Card id={item?.id} title={item?.title} image={item?.image} />
-      </View>
-    </TouchableNativeFeedback>
-  );
+  const renderItem = ({ item }: ItemProps) => {
+    const imageId = `${camelCase(title)}.${item?.id}`;
+    return (
+      <TouchableNativeFeedback
+        useForeground={true}
+        onPress={() => {
+          onCardPress({ id: item.id, imageId });
+        }}
+      >
+        <View style={styles.touchable}>
+          <Card id={imageId} title={item.title} image={item.image} />
+        </View>
+      </TouchableNativeFeedback>
+    );
+  };
   return (
     <View>
       <View style={styles.titleBar}>

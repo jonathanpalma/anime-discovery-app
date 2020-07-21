@@ -1,43 +1,46 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, SafeAreaView, ScrollView, StyleSheet } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import ScrollCardSection from '@app/components/ScrollCardSection';
-import { CardItem } from '@app/ts/types';
 import { useNavigation } from 'react-navigation-hooks';
-
-// TODO: get information from API
-const ITEMS: CardItem[] = [
-  {
-    image:
-      'https://media.kitsu.io/anime/poster_images/5714/small.jpg?1408456259',
-    id: '1',
-    title: 'Kimetsu No Yaiba',
-  },
-  {
-    image:
-      'https://media.kitsu.io/anime/poster_images/5714/small.jpg?1408456259',
-    id: '2',
-    title: 'Boku No Hero Academia',
-  },
-  {
-    image:
-      'https://media.kitsu.io/anime/poster_images/5714/small.jpg?1408456259',
-    id: '3',
-    title: 'Shingeki No Kyoji',
-  },
-];
+import {
+  fetchHighestRated,
+  getHighestRatedAnime,
+  getMostPopularAnime,
+  fetchMostPopular,
+  getNormalizedList,
+} from '@app/store/slices/anime';
+import { mapAnimeToCard } from '@app/utils/dataMappers';
+import { CardCallback } from '@app/ts/types';
 
 function Home() {
+  const dispatch = useDispatch();
   const { navigate } = useNavigation();
-  const onCardPress = (id: string) => {
-    navigate('Detail', { item: ITEMS.find((item) => item.id === id) });
+  const anime = useSelector(getNormalizedList);
+  const highestRatedAnime = useSelector(getHighestRatedAnime);
+  const mostPopularAnime = useSelector(getMostPopularAnime);
+  useEffect(() => {
+    dispatch(fetchHighestRated());
+    dispatch(fetchMostPopular());
+  }, [dispatch]);
+  const onCardPress = ({ id, imageId }: CardCallback) => {
+    navigate('Detail', {
+      item: anime[id],
+      imageId,
+    });
   };
   return (
     <View style={styles.container}>
       <SafeAreaView>
         <ScrollView style={styles.scrollContainer}>
           <ScrollCardSection
-            title="Title 1"
-            items={ITEMS}
+            title="Highest Rated"
+            items={highestRatedAnime.list.map(mapAnimeToCard)}
+            onCardPress={onCardPress}
+          />
+          <ScrollCardSection
+            title="Most Popular"
+            items={mostPopularAnime.list.map(mapAnimeToCard)}
             onCardPress={onCardPress}
           />
         </ScrollView>
