@@ -69,31 +69,17 @@ export const fetchHighestRated = (
 export const getAllIds = (state: RootState) => state.entities.anime.data.allIds;
 export const getNormalizedList = (state: RootState) =>
   state.entities.anime.data.byId || {};
-export const getHighestRatedIds = (state: RootState) =>
-  state.entities.anime.lists.highestRated.ids;
-export const getMostPopularIds = (state: RootState) =>
-  state.entities.anime.lists.mostPopular.ids;
 export const getAll = createSelector(
   getNormalizedList,
   getAllIds,
   (byId, allIds) => allIds.map((id) => byId[id])
 );
-export const getHighestRated = createSelector(
-  getNormalizedList,
-  getHighestRatedIds,
-  (byId, ids) =>
-    isEmpty(byId)
-      ? []
-      : [...ids]
-          .filter((id) => byId[id])
-          .sort((a, b) =>
-            byId[a].attributes.ratingRank > byId[b].attributes.ratingRank
-              ? 1
-              : -1
-          )
-          .map((id) => byId[id])
-);
-export const getMostPopular = createSelector(
+
+/* most popular anime */
+const getMostPopularState = (state: RootState) =>
+  state.entities.anime.lists.highestRated;
+const getMostPopularIds = (state: RootState) => getMostPopularState(state).ids;
+const getMostPopularList = createSelector(
   getNormalizedList,
   getMostPopularIds,
   (byId, ids) =>
@@ -109,6 +95,37 @@ export const getMostPopular = createSelector(
           )
           .map((id) => byId[id])
 );
+export const getMostPopularAnime = (state: RootState) => ({
+  error: getMostPopularState(state).error,
+  isLoading: getMostPopularState(state).isLoading,
+  list: getMostPopularList(state),
+});
+
+/* highest rated anime */
+const getHighestRatedState = (state: RootState) =>
+  state.entities.anime.lists.highestRated;
+const getHighestRatedIds = (state: RootState) =>
+  getHighestRatedState(state).ids;
+const getHighestRatedList = createSelector(
+  getNormalizedList,
+  getHighestRatedIds,
+  (byId, ids) =>
+    isEmpty(byId)
+      ? []
+      : [...ids]
+          .filter((id) => byId[id])
+          .sort((a, b) =>
+            byId[a].attributes.ratingRank > byId[b].attributes.ratingRank
+              ? 1
+              : -1
+          )
+          .map((id) => byId[id])
+);
+export const getHighestRatedAnime = (state: RootState) => ({
+  error: getHighestRatedState(state).error,
+  isLoading: getHighestRatedState(state).isLoading,
+  list: getHighestRatedList(state),
+});
 
 // Reducer
 export default combineReducers({
