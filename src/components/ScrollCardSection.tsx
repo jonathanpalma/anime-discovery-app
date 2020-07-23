@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import camelCase from 'lodash/camelCase';
 import Card from '@app/components/Card';
+import { COLOR_GRAY_HEATHER } from '@app/constants/colors';
 import { CardCallback, CardItem } from '@app/ts/types';
 
 type Props = {
@@ -73,13 +74,13 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   title: {
-    color: '#b8bece',
+    color: COLOR_GRAY_HEATHER,
     fontWeight: '600',
     fontSize: 15,
     textTransform: 'uppercase',
   },
   link: {
-    color: '#b8bece',
+    color: COLOR_GRAY_HEATHER,
     fontWeight: '600',
     fontSize: 13,
   },

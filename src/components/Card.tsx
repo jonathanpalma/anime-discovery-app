@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { SharedElement } from 'react-navigation-shared-element';
+import { COLOR_BLACK, COLOR_FIORD, COLOR_WHITE } from '@app/constants/colors';
 
 type Props = {
   id: string;
@@ -31,13 +32,13 @@ export default Card;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: COLOR_WHITE,
     borderRadius: 14,
     height: 225,
     width: 150,
     // box-shadow
     elevation: 3,
-    shadowColor: '#000',
+    shadowColor: COLOR_BLACK,
     shadowOffset: {
       height: 1,
       width: 0,
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
     height: 50,
   },
   title: {
-    color: '#3c4560',
+    color: COLOR_FIORD,
     fontSize: 14,
     fontWeight: '600',
     textAlign: 'center',

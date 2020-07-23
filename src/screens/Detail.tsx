@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from 'react-navigation-hooks';
 import { SharedElement } from 'react-navigation-shared-element';
 import TextValue from '@app/components/TextValue';
+import { COLOR_GRAY_ATHENS } from '@app/constants/colors';
 import { Anime, Manga } from '@app/ts/types';
 
 function Detail() {
@@ -43,7 +44,7 @@ export default Detail;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f0f3f5',
+    backgroundColor: COLOR_GRAY_ATHENS,
   },
   header: {
     flexDirection: 'row',
