@@ -10,6 +10,8 @@ import {
   fetchMostPopular,
   getNormalizedList,
 } from '@app/store/slices/anime';
+import Header from '@app/components/Header';
+import { COLOR_GRAY_ATHENS } from '@app/constants/colors';
 import { mapAnimeToCard } from '@app/utils/dataMappers';
 import { CardCallback } from '@app/ts/types';
 
@@ -31,8 +33,9 @@ function Home() {
   };
   return (
     <View style={styles.container}>
-      <SafeAreaView>
+      <SafeAreaView style={styles.safeContainer}>
         <ScrollView style={styles.scrollContainer}>
+          <Header />
           <ScrollCardSection
             title="Highest Rated"
             items={highestRatedAnime.list.map(mapAnimeToCard)}
@@ -54,7 +57,10 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f0f3f5',
+    backgroundColor: COLOR_GRAY_ATHENS,
+  },
+  safeContainer: {
+    flex: 1,
   },
   scrollContainer: {
     height: '100%',
