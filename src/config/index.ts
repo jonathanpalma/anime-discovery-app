@@ -15,6 +15,9 @@ const commons = {
     },
     endpoints: {
       getAnime: createJsonApiResource('/anime'),
+      getAnimeById: (id: string) => ({
+        path: `${createJsonApiResource('/anime').path}/${id}`,
+      }),
       getAnimeList: createJsonApiResource('/anime')
         .field([
           {
