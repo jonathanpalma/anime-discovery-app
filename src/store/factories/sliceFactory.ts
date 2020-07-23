@@ -36,7 +36,7 @@ export function createListSlice(name: string) {
       requestSuccess: (state, action: PayloadAction<AnimeResponse>) => {
         delete state.error;
         state.ids = Object.keys(action.payload.anime);
-        state.isLoading = true;
+        state.isLoading = false;
       },
     },
   });

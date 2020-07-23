@@ -6,12 +6,15 @@ import {
   TouchableNativeFeedback,
   View,
 } from 'react-native';
+import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
+import isEmpty from 'lodash/isEmpty';
 import camelCase from 'lodash/camelCase';
 import Card from '@app/components/Card';
 import { COLOR_GRAY_HEATHER } from '@app/constants/colors';
 import { CardCallback, CardItem } from '@app/ts/types';
 
 type Props = {
+  isLoading: boolean;
   items: CardItem[];
   title: string;
   onCardPress: (cb: CardCallback) => void;
@@ -22,6 +25,7 @@ type ItemProps = {
 };
 
 function ScrollCardSection({
+  isLoading = false,
   items = [],
   onCardPress = (_) => {},
   title,
@@ -47,14 +51,34 @@ function ScrollCardSection({
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.link}>View All</Text>
       </View>
-      <FlatList
-        contentContainerStyle={styles.horizontalScrollContainer}
-        data={items}
-        horizontal={true}
-        keyExtractor={(item) => item?.id}
-        renderItem={renderItem}
-        showsHorizontalScrollIndicator={false}
-      />
+      {isLoading && isEmpty(items) ? (
+        <FlatList
+          contentContainerStyle={styles.horizontalScrollContainer}
+          data={[...Array(10).keys()]}
+          horizontal={true}
+          keyExtractor={(item) => `${item}`}
+          renderItem={() => (
+            <SkeletonPlaceholder speed={1200}>
+              <SkeletonPlaceholder.Item
+                width={150}
+                height={225}
+                borderRadius={14}
+                marginLeft={10}
+              />
+            </SkeletonPlaceholder>
+          )}
+          showsHorizontalScrollIndicator={false}
+        />
+      ) : (
+        <FlatList
+          contentContainerStyle={styles.horizontalScrollContainer}
+          data={items}
+          horizontal={true}
+          keyExtractor={(item) => item?.id}
+          renderItem={renderItem}
+          showsHorizontalScrollIndicator={false}
+        />
+      )}
     </View>
   );
 }
@@ -67,6 +91,11 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 20,
     paddingTop: 10,
+  },
+  cardSkeleton: {
+    borderRadius: 14,
+    height: 225,
+    width: 150,
   },
   touchable: {
     marginLeft: 10,

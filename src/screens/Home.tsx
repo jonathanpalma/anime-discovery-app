@@ -38,11 +38,13 @@ function Home() {
           <Header />
           <ScrollCardSection
             title="Highest Rated"
+            isLoading={highestRatedAnime.isLoading}
             items={highestRatedAnime.list.map(mapAnimeToCard)}
             onCardPress={onCardPress}
           />
           <ScrollCardSection
             title="Most Popular"
+            isLoading={mostPopularAnime.isLoading}
             items={mostPopularAnime.list.map(mapAnimeToCard)}
             onCardPress={onCardPress}
           />
