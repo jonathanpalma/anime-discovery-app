@@ -21,6 +21,7 @@ module.exports = {
         argsIgnorePattern: '_',
       },
     ],
+    'global-require': 0,
     'no-param-reassign': ['error', { props: false }],
     'no-use-before-define': [
       'error',

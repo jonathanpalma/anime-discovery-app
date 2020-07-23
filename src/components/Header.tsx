@@ -9,12 +9,7 @@ import {
 function Header() {
   return (
     <View style={styles.header}>
-      <Image
-        style={styles.avatar}
-        source={{
-          uri: 'https://avatars3.githubusercontent.com/u/12414771?v=4',
-        }}
-      />
+      <Image style={styles.avatar} source={require('../assets/avatar.jpeg')} />
       <View style={styles.container}>
         <Text style={styles.title}>Anime Discovery by:</Text>
         <Text style={styles.name}>Jonathan Palma</Text>
