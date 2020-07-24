@@ -73,12 +73,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   touchable: {
-    paddingHorizontal: 13,
-    paddingVertical: 10,
-    marginHorizontal: -13,
-    marginVertical: -10,
     borderRadius: 50,
     overflow: 'hidden',
+    // android's ripple effect
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    marginHorizontal: -10,
+    marginVertical: -8,
   },
   icon: {
     position: 'absolute',
