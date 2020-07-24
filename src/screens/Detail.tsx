@@ -37,10 +37,6 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
   },
-  image: {
-    height: 115,
-    width: 100,
-  },
 });
 
 export default Detail;

@@ -3,16 +3,15 @@ import { Image, View, StyleSheet } from 'react-native';
 import { SharedElement } from 'react-navigation-shared-element';
 import { useNavigation } from 'react-navigation-hooks';
 import TextValue from '@app/components/TextValue';
-import { Anime, NormalizedJsonApiResource } from '@app/ts/types';
+import { NormalizedAnime } from '@app/ts/types';
 
 type Props = {
-  item: NormalizedJsonApiResource<Anime>;
+  item: NormalizedAnime;
 };
 
-function DetailHeader({ item }: Props) {
-  const nav = useNavigation();
-  const { attributes } = item;
-  const imageId = nav.getParam('imageId', '');
+function DetailHeader({ item: { attributes } }: Props) {
+  const { getParam } = useNavigation();
+  const imageId = getParam('imageId', '');
   return (
     <View style={styles.header}>
       <SharedElement id={`item.${imageId}.image`}>
@@ -46,7 +45,8 @@ const styles = StyleSheet.create({
   },
   image: {
     height: 150,
-    width: 128.5,
+    width: 150,
+    borderRadius: 75,
   },
   textContainer: {
     paddingLeft: 10,
