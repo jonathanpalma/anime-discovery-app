@@ -1,29 +1,31 @@
 import React, { useEffect } from 'react';
 import { View, SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import ScrollCardSection from '@app/components/ScrollCardSection';
 import { useNavigation } from 'react-navigation-hooks';
-import {
-  fetchHighestRated,
-  getHighestRatedAnime,
-  getMostPopularAnime,
-  fetchMostPopular,
-  getNormalizedList,
-} from '@app/store/slices/anime';
 import Header from '@app/components/Header';
+import ScrollCardSection from '@app/components/ScrollCardSection';
 import { COLOR_GRAY_ATHENS } from '@app/constants/colors';
+import { getNormalizedAnimeList } from '@app/store/slices/entities/anime';
 import { mapAnimeToCard } from '@app/utils/dataMappers';
+import {
+  getHighestRatedAnime,
+  fetchHighestRatedAnime,
+} from '@app/store/slices/lists/anime/highestRatedAnime';
+import {
+  getMostPopularAnime,
+  fetchMostPopularAnime,
+} from '@app/store/slices/lists/anime/mostPopularAnime';
 import { CardCallback } from '@app/ts/types';
 
 function Home() {
   const dispatch = useDispatch();
   const { navigate } = useNavigation();
-  const anime = useSelector(getNormalizedList);
+  const anime = useSelector(getNormalizedAnimeList);
   const highestRatedAnime = useSelector(getHighestRatedAnime);
   const mostPopularAnime = useSelector(getMostPopularAnime);
   useEffect(() => {
-    dispatch(fetchHighestRated());
-    dispatch(fetchMostPopular());
+    dispatch(fetchHighestRatedAnime());
+    dispatch(fetchMostPopularAnime());
   }, [dispatch]);
   const onCardPress = ({ id, imageId }: CardCallback) => {
     navigate('Detail', {

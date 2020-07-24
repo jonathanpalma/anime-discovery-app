@@ -1,6 +1,5 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import anime from '@app/store/slices/anime';
+import entities from '@app/store/slices/entities';
+import lists from '@app/store/slices/lists';
 
-const entities = combineReducers({ anime });
-
-export default combineReducers({ entities });
+export default combineReducers({ entities, lists });
