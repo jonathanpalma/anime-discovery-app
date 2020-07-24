@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { COLOR_GRAY_ATHENS } from '@app/constants/colors';
 import { getSelectedAnime } from '@app/store/slices/entities/anime';
 import DetailHeader from '@app/components/DetailHeader';
+import { useNavigation } from 'react-navigation-hooks';
 
 function Detail() {
   const item = useSelector(getSelectedAnime); // Anime | Manga
@@ -16,6 +17,11 @@ function Detail() {
     </View>
   );
 }
+
+Detail.sharedElements = (nav: ReturnType<typeof useNavigation>) => {
+  const imageId = nav.getParam('imageId', '');
+  return [`item.${imageId}.image`];
+};
 
 const styles = StyleSheet.create({
   container: {

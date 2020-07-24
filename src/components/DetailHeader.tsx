@@ -28,11 +28,6 @@ function DetailHeader({ item }: Props) {
   );
 }
 
-DetailHeader.sharedElements = (nav: ReturnType<typeof useNavigation>) => {
-  const imageId = nav.getParam('imageId', '');
-  return [`item.${imageId}.image`];
-};
-
 const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
