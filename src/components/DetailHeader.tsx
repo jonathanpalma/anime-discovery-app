@@ -11,18 +11,27 @@ type Props = {
 
 function DetailHeader({ item }: Props) {
   const nav = useNavigation();
+  const { attributes } = item;
   const imageId = nav.getParam('imageId', '');
   return (
     <View style={styles.header}>
       <SharedElement id={`item.${imageId}.image`}>
         <Image
           style={styles.image}
-          source={{ uri: item?.attributes.posterImage.small }}
+          source={{ uri: attributes?.posterImage.small }}
           resizeMode="cover"
         />
       </SharedElement>
-      <View>
-        <TextValue label="Main Title" value={item?.attributes.canonicalTitle} />
+      <View style={styles.textContainer}>
+        <TextValue label="Canonical Title" value={attributes?.canonicalTitle} />
+        <TextValue
+          label="Type"
+          value={`${attributes?.showType}, ${attributes?.subtype}`}
+        />
+        <TextValue
+          label="Year"
+          value={`${attributes?.startDate} ~ ${attributes?.endDate}`}
+        />
       </View>
     </View>
   );
@@ -30,11 +39,18 @@ function DetailHeader({ item }: Props) {
 
 const styles = StyleSheet.create({
   header: {
+    width: '100%',
+    marginVertical: 20,
+    paddingHorizontal: 20,
     flexDirection: 'row',
   },
   image: {
-    height: 115,
-    width: 100,
+    height: 150,
+    width: 128.5,
+  },
+  textContainer: {
+    paddingLeft: 10,
+    justifyContent: 'space-between',
   },
 });
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
+import { COLOR_GRAY_HEATHER, COLOR_FIORD } from '@app/constants/colors';
 
 type Props = {
   label: string;
@@ -17,10 +18,14 @@ function TextValue({ label, value }: Props) {
 
 const styles = StyleSheet.create({
   label: {
+    color: COLOR_FIORD,
+    fontSize: 16,
     fontWeight: 'bold',
   },
   value: {
-    fontWeight: '600',
+    color: COLOR_GRAY_HEATHER,
+    fontSize: 14,
+    fontWeight: '500',
   },
 });
 
