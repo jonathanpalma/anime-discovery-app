@@ -15,8 +15,6 @@ function TextValue({ label, value }: Props) {
   );
 }
 
-export default TextValue;
-
 const styles = StyleSheet.create({
   label: {
     fontWeight: 'bold',
@@ -25,3 +23,5 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
 });
+
+export default TextValue;

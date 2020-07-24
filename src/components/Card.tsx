@@ -28,8 +28,6 @@ function Card({ id, image, title }: Props) {
   );
 }
 
-export default Card;
-
 const styles = StyleSheet.create({
   container: {
     backgroundColor: COLOR_WHITE,
@@ -72,3 +70,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+
+export default Card;
