@@ -6,10 +6,10 @@ import {
   TouchableNativeFeedback,
   View,
 } from 'react-native';
-import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import isEmpty from 'lodash/isEmpty';
 import camelCase from 'lodash/camelCase';
 import Card from '@app/components/Card';
+import ScrollCardSectionSkeleton from '@app/components/ScrollCardSectionSkeleton';
 import { COLOR_GRAY_HEATHER } from '@app/constants/colors';
 import { CardCallback, CardItem } from '@app/ts/types';
 
@@ -52,23 +52,7 @@ function ScrollCardSection({
         <Text style={styles.link}>View All</Text>
       </View>
       {isLoading && isEmpty(items) ? (
-        <FlatList
-          contentContainerStyle={styles.horizontalScrollContainer}
-          data={[...Array(10).keys()]}
-          horizontal={true}
-          keyExtractor={(item) => `${item}`}
-          renderItem={() => (
-            <SkeletonPlaceholder speed={1200}>
-              <SkeletonPlaceholder.Item
-                width={150}
-                height={225}
-                borderRadius={14}
-                marginLeft={10}
-              />
-            </SkeletonPlaceholder>
-          )}
-          showsHorizontalScrollIndicator={false}
-        />
+        <ScrollCardSectionSkeleton />
       ) : (
         <FlatList
           contentContainerStyle={styles.horizontalScrollContainer}
@@ -82,8 +66,6 @@ function ScrollCardSection({
     </View>
   );
 }
-
-export default ScrollCardSection;
 
 const styles = StyleSheet.create({
   horizontalScrollContainer: {
@@ -120,3 +102,5 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
 });
+
+export default ScrollCardSection;
