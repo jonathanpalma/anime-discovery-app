@@ -59,6 +59,7 @@ export type CardCallback = {
 export type NormalizedState<T> = {
   byId: { [key: string]: T };
   allIds: string[];
+  selectedId?: string;
 };
 export type NormalizedAnime = NormalizedJsonApiResource<Anime>;
 export type NormalizedAnimeDocument = NormalizedJsonApiDocument<

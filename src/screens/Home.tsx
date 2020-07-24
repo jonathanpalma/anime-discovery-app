@@ -5,8 +5,8 @@ import { useNavigation } from 'react-navigation-hooks';
 import Header from '@app/components/Header';
 import ScrollCardSection from '@app/components/ScrollCardSection';
 import { COLOR_GRAY_ATHENS } from '@app/constants/colors';
-import { getNormalizedAnimeList } from '@app/store/slices/entities/anime';
 import { mapAnimeToCard } from '@app/utils/dataMappers';
+import { selectAnime } from '@app/store/slices/entities/anime';
 import {
   getHighestRatedAnime,
   fetchHighestRatedAnime,
@@ -20,7 +20,6 @@ import { CardCallback } from '@app/ts/types';
 function Home() {
   const dispatch = useDispatch();
   const { navigate } = useNavigation();
-  const anime = useSelector(getNormalizedAnimeList);
   const highestRatedAnime = useSelector(getHighestRatedAnime);
   const mostPopularAnime = useSelector(getMostPopularAnime);
   useEffect(() => {
@@ -28,10 +27,8 @@ function Home() {
     dispatch(fetchMostPopularAnime());
   }, [dispatch]);
   const onCardPress = ({ id, imageId }: CardCallback) => {
-    navigate('Detail', {
-      item: anime[id],
-      imageId,
-    });
+    dispatch(selectAnime(id));
+    navigate('Detail', { imageId });
   };
   return (
     <View style={styles.container}>

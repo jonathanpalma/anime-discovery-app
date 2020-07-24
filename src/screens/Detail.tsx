@@ -1,45 +1,21 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { useSelector } from 'react-redux';
+import { View, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNavigation } from 'react-navigation-hooks';
-import { SharedElement } from 'react-navigation-shared-element';
-import TextValue from '@app/components/TextValue';
 import { COLOR_GRAY_ATHENS } from '@app/constants/colors';
-import { Anime, Manga } from '@app/ts/types';
+import { getSelectedAnime } from '@app/store/slices/entities/anime';
+import DetailHeader from '@app/components/DetailHeader';
 
 function Detail() {
-  const { getParam } = useNavigation();
-  const item: Anime | Manga = getParam('item', {});
-  const imageId = getParam('imageId', '');
+  const item = useSelector(getSelectedAnime); // Anime | Manga
   return (
     <View style={styles.container}>
       <SafeAreaView>
-        <View style={styles.header}>
-          <SharedElement id={`item.${imageId}.image`}>
-            <Image
-              style={styles.image}
-              source={{ uri: item?.attributes.posterImage.small }}
-              resizeMode="cover"
-            />
-          </SharedElement>
-          <View>
-            <TextValue
-              label="Main Title"
-              value={item?.attributes.canonicalTitle}
-            />
-          </View>
-        </View>
+        <DetailHeader item={item} />
       </SafeAreaView>
     </View>
   );
 }
-
-Detail.sharedElements = (navigation: ReturnType<typeof useNavigation>) => {
-  const imageId = navigation.getParam('imageId', '');
-  return [`item.${imageId}.image`];
-};
-
-export default Detail;
 
 const styles = StyleSheet.create({
   container: {
@@ -54,3 +30,5 @@ const styles = StyleSheet.create({
     width: 100,
   },
 });
+
+export default Detail;
