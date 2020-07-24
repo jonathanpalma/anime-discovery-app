@@ -33,6 +33,14 @@ export type Anime = {
   subtype: AnimeType;
   startDate: string;
 };
+export type AnimeDetail = Anime & {
+  synopsis: string;
+  favoritesCount: number;
+  userCount: number;
+  youtubeVideoId: string;
+  episodeLength: number;
+  totalLength: number;
+};
 export type Manga = {
   canonicalTitle: string;
   endDate: string;
@@ -62,8 +70,13 @@ export type NormalizedState<T> = {
   selectedId?: string;
 };
 export type NormalizedAnime = NormalizedJsonApiResource<Anime>;
+export type NormalizedAnimeDetail = NormalizedJsonApiResource<AnimeDetail>;
 export type NormalizedAnimeDocument = NormalizedJsonApiDocument<
   NormalizedAnime,
+  'anime'
+>;
+export type NormalizedAnimeDetailDocument = NormalizedJsonApiDocument<
+  NormalizedAnimeDetail,
   'anime'
 >;
 export type NormalizedManga = NormalizedJsonApiResource<Manga>;
