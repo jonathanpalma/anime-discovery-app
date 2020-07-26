@@ -34,6 +34,7 @@ export type Anime = {
   startDate: string;
 };
 export type AnimeDetail = Anime & {
+  coverImage: Image;
   synopsis: string;
   favoritesCount: number;
   userCount: number;

@@ -13,6 +13,7 @@ import {
   COLOR_FIORD,
   COLOR_GRAY_HEATHER,
 } from '@app/constants/colors';
+import { PADDING } from '@app/constants/dimensions';
 
 const openGithub = () => {
   Linking.openURL('https://github.com/jonathanpalma');
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
   header: {
     width: '100%',
     marginVertical: 20,
-    paddingHorizontal: 20,
+    paddingHorizontal: PADDING,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   touchable: {
-    borderRadius: 50,
+    borderRadius: 25,
     overflow: 'hidden',
     // android's ripple effect
     paddingHorizontal: 10,
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     position: 'absolute',
-    right: 20,
+    right: PADDING,
     top: 5,
   },
 });

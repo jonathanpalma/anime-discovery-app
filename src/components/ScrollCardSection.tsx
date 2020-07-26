@@ -12,6 +12,7 @@ import Card from '@app/components/Card';
 import ScrollCardSectionSkeleton from '@app/components/ScrollCardSectionSkeleton';
 import { COLOR_GRAY_HEATHER } from '@app/constants/colors';
 import { CardCallback, CardItem } from '@app/ts/types';
+import { PADDING } from '@app/constants/dimensions';
 
 type Props = {
   isLoading: boolean;
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
   horizontalScrollContainer: {
     paddingBottom: 10,
     paddingLeft: 10,
-    paddingRight: 20,
+    paddingRight: PADDING,
     paddingTop: 10,
   },
   cardSkeleton: {
@@ -96,7 +97,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
   },
   titleBar: {
-    marginHorizontal: 20,
+    marginHorizontal: PADDING,
     marginTop: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
