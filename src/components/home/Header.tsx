@@ -25,7 +25,7 @@ function Header() {
       <View style={styles.container}>
         <Image
           style={styles.avatar}
-          source={require('../assets/avatar.jpeg')}
+          source={require('../../assets/avatar.jpeg')}
         />
         <View style={styles.textContainer}>
           <Text style={styles.title}>Anime Discovery by:</Text>

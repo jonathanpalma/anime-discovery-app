@@ -6,7 +6,7 @@ import Animated, { interpolate } from 'react-native-reanimated';
 import {
   HEADER_IMAGE_HEIGHT,
   topInterpolator,
-} from '@app/components/DetailHeaderImage';
+} from '@app/components/detail/DetailHeaderImage';
 
 type Props = {
   image?: string;

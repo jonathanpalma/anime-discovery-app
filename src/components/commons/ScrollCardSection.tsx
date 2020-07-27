@@ -8,8 +8,8 @@ import {
 } from 'react-native';
 import isEmpty from 'lodash/isEmpty';
 import camelCase from 'lodash/camelCase';
-import Card from '@app/components/Card';
-import ScrollCardSectionSkeleton from '@app/components/ScrollCardSectionSkeleton';
+import Card from '@app/components/commons/Card';
+import ScrollCardSectionSkeleton from '@app/components/commons/ScrollCardSectionSkeleton';
 import { COLOR_GRAY_HEATHER } from '@app/constants/colors';
 import { CardCallback, CardItem } from '@app/ts/types';
 import { PADDING } from '@app/constants/dimensions';

@@ -3,15 +3,15 @@ import { useSelector } from 'react-redux';
 import { View, StyleSheet, Text } from 'react-native';
 import { COLOR_GRAY_ATHENS } from '@app/constants/colors';
 import { getSelectedAnime } from '@app/store/slices/entities/anime';
-import DetailHeader from '@app/components/DetailHeader';
+import DetailHeader from '@app/components/detail/DetailHeader';
 import { useNavigation } from 'react-navigation-hooks';
 import useAnimeDetail from '@app/hooks/useAnimeDetail';
 import DetailHeaderImage, {
   HEADER_IMAGE_HEIGHT,
-} from '@app/components/DetailHeaderImage';
+} from '@app/components/detail/DetailHeaderImage';
 import Animated from 'react-native-reanimated';
 import { useValue, onScrollEvent } from 'react-native-redash';
-import DetailHeaderAvatar from '@app/components/DetailHeaderAvatar';
+import DetailHeaderAvatar from '@app/components/detail/DetailHeaderAvatar';
 
 function Detail() {
   const item = useSelector(getSelectedAnime); // Anime | Manga

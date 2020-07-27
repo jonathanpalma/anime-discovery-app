@@ -28,7 +28,7 @@ import {
   PADDING,
   ICON_SIZE,
 } from '@app/constants/dimensions';
-import { HEADER_IMAGE_HEIGHT } from '@app/components/DetailHeaderImage';
+import { HEADER_IMAGE_HEIGHT } from '@app/components/detail/DetailHeaderImage';
 import { NormalizedAnime } from '@app/ts/types';
 
 type Props = {
