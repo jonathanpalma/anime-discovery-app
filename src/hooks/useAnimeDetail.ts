@@ -7,7 +7,7 @@ import { JsonApiDocument, NormalizedAnimeDetailDocument } from '@app/ts/types';
 
 const { baseURL, headers, endpoints } = config.api;
 function useAnimeDetail(id: string) {
-  return useQuery('animeDetail', async () => {
+  return useQuery(`animeDetail[${id}]`, async () => {
     const response = await axios.get<JsonApiDocument>(
       `${baseURL}${endpoints.getAnimeById(id).path}`,
       { headers }
