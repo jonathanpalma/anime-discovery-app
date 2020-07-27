@@ -4,7 +4,7 @@ import { COLOR_FIORD } from '@app/constants/colors';
 
 type Props = {
   label: string;
-  value: string;
+  value?: string;
 };
 
 function TextValue({ label, value }: Props) {
