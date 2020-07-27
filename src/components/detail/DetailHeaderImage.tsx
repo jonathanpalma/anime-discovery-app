@@ -2,8 +2,10 @@ import React from 'react';
 import { Dimensions, StyleSheet, Image } from 'react-native';
 import Animated, { Extrapolate, interpolate } from 'react-native-reanimated';
 import LinearGradient from 'react-native-linear-gradient';
+import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 
 type Props = {
+  isLoading?: boolean;
   image?: string;
   y: Animated.Value<number>;
 };
@@ -21,12 +23,26 @@ export const topInterpolator = {
   extrapolateLeft: Extrapolate.CLAMP,
 };
 
-function DetailHeaderImage({ image, y }: Props) {
+function DetailHeaderImage({ isLoading, image, y }: Props) {
   const height = interpolate(y, heightInterpolator);
   const top = interpolate(y, topInterpolator);
   return (
     <Animated.View style={[styles.container, { top, height }]}>
-      <Image source={{ uri: image }} style={styles.image} resizeMode="cover" />
+      {isLoading ? (
+        <SkeletonPlaceholder speed={1200}>
+          <SkeletonPlaceholder.Item
+            position="absolute"
+            height={HEADER_IMAGE_HEIGHT}
+            width="100%"
+          />
+        </SkeletonPlaceholder>
+      ) : (
+        <Image
+          source={{ uri: image }}
+          style={styles.image}
+          resizeMode="cover"
+        />
+      )}
       <LinearGradient
         locations={[0, 0.4, 0.6, 1.0]}
         colors={[

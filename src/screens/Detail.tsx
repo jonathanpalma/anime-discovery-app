@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { COLOR_GRAY_ATHENS } from '@app/constants/colors';
 import { getSelectedAnime } from '@app/store/slices/entities/anime';
 import DetailHeader from '@app/components/detail/DetailHeader';
@@ -12,31 +12,28 @@ import DetailHeaderImage, {
 import Animated from 'react-native-reanimated';
 import { useValue, onScrollEvent } from 'react-native-redash';
 import DetailHeaderAvatar from '@app/components/detail/DetailHeaderAvatar';
+import DetailContent from '@app/components/detail/DetailContent';
+import { PADDING } from '@app/constants/dimensions';
 
 function Detail() {
   const item = useSelector(getSelectedAnime); // Anime | Manga
-  const { status, data, error, isFetching } = useAnimeDetail(item.id);
+  const detailQuery = useAnimeDetail(item.id);
   const y = useValue(0);
   return (
     <View style={styles.container}>
-      <DetailHeaderImage image={data?.attributes.coverImage.original} y={y} />
-      <DetailHeaderAvatar image={data?.attributes.posterImage.small} y={y} />
+      <DetailHeaderImage
+        isLoading={detailQuery?.status === 'loading'}
+        image={detailQuery?.data?.attributes.coverImage.original}
+        y={y}
+      />
+      <DetailHeaderAvatar image={item?.attributes.posterImage.small} y={y} />
       <Animated.ScrollView
         onScroll={onScrollEvent({ y })}
         scrollEventThrottle={1}
-        style={styles.scrollContainer}
+        style={StyleSheet.absoluteFill}
+        contentContainerStyle={styles.scrollContainer}
       >
-        <View>
-          {[...new Array(25)].map((i, index) => (
-            <Text key={`${i}${index}`} style={{ marginBottom: 25 }}>
-              This is a test {i}
-            </Text>
-          ))}
-        </View>
-        {status === 'loading' && <Text>Loading...</Text>}
-        {status === 'error' && <Text>Error: {error?.message}</Text>}
-        {isFetching && <Text>Background Updating...</Text>}
-        {data?.attributes.youtubeVideoId && <Text>Open YouTube video</Text>}
+        <DetailContent query={detailQuery} />
       </Animated.ScrollView>
       <DetailHeader item={item} y={y} />
     </View>
@@ -54,8 +51,8 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR_GRAY_ATHENS,
   },
   scrollContainer: {
-    ...StyleSheet.absoluteFillObject,
-    paddingTop: HEADER_IMAGE_HEIGHT + 10,
+    paddingTop: HEADER_IMAGE_HEIGHT + PADDING,
+    paddingBottom: PADDING,
   },
   header: {
     flexDirection: 'row',
