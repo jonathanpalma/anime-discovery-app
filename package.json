@@ -25,7 +25,7 @@
     "json-api-normalizer": "^1.0.0",
     "lodash": "^4.17.19",
     "react": "16.13.1",
-    "react-native": "0.63.0",
+    "react-native": "0.64.1",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-linear-gradient": "^2.5.6",
     "react-native-read-more-text": "^1.1.2",
